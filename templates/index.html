@@ -5,7 +5,7 @@
 	<title>다음 지도 API</title>
 </head>
 <body>
-	<div id="map" style="width:100%;height:100vh;"></div>
+	<div id="map" style="width:50%;height:100vh;"></div>
 
 	<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=5670b606962bf72b64eb2e8de66bcf5b&libraries=clusterer"></script>
 	<script>
@@ -27,10 +27,23 @@
         });
 
         var data = [
-            [37.553210, 126.972613, '<div style="padding:5px;">날씨 정보1 </div>'],
-            [37.453157, 126.705229, '<div style="padding:5px;">날씨 정보2 </div>'],
-            [35.829736, 128.563525, '<div style="padding:5px;">날씨 정보3 </div>'],
-            [37.558907, 126.978305, '<div style="padding:5px;">날씨 정보4 </div>']
+            [37.5665, 126.9780, '<div style="padding:5px;">{{ pm10.seoul }} 서울 </div>'],
+            [35.1796, 129.0756, '<div style="padding:5px;">{{ pm10.busan }} 부산 </div>'],
+            [35.8714, 128.6014, '<div style="padding:5px;">{{ pm10.daegu }} 대구 </div>'],
+            [37.4563, 126.7052, '<div style="padding:5px;">{{ pm10.incheon }} 인천 </div>'],
+            [35.1595, 126.8526, '<div style="padding:5px;">{{ pm10.gwangju }} 광주 </div>'],
+            [36.3504, 127.3845, '<div style="padding:5px;">{{ pm10.daejeon }} 대전 </div>'],
+            [35.5384, 129.3114, '<div style="padding:5px;">{{ pm10.ulsan }} 울산 </div>'],
+            [37.4138, 127.5183, '<div style="padding:5px;">{{ pm10.gyeonggi }} 경기 </div>'],
+            [37.8228, 128.1555, '<div style="padding:5px;">{{ pm10.gangwon }} 강원 </div>'],
+            [36.8000, 127.7000, '<div style="padding:5px;">{{ pm10.chungbuk }} 충북 </div>'],
+            [36.5623, 126.9541, '<div style="padding:5px;">{{ pm10.chungnam }} 충남 </div>'],
+            [35.7175, 127.1530, '<div style="padding:5px;">{{ pm10.jeonbuk }} 전북 </div>'],
+            [34.8679, 126.9910, '<div style="padding:5px;">{{ pm10.jeonnam }} 전남 </div>'],
+            [36.4919, 128.8889, '<div style="padding:5px;">{{ pm10.gyeongbuk }} 경북 </div>'],
+            [35.4606, 128.2132, '<div style="padding:5px;">{{ pm10.gyeongnam }} 경남 </div>'],
+            [33.4996, 126.5312, '<div style="padding:5px;">{{ pm10.jeju }} 제주 </div>'],
+            [36.48750, 127.28167, '<div style="padding:5px;">{{ pm10.sejong }} 세종 </div>']
         ]
         
         var markers = [];
