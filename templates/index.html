@@ -27,7 +27,7 @@
             minLevel: 10 //클러스터 할 최소 지도 레벨
         });
 
-        function decideColor(num){
+        function pm10status(num){
             if (num<=30){
                 return '훌륭';
             }else if(num<=80){
@@ -37,29 +37,76 @@
             }else{
                 return "위험";
             }
+        };
+
+        function pm25status(num){
+            if (num<=15){
+                return '훌륭';
+            }else if(num<=35){
+                return'좋음';
+            }else if(num<=75){
+                return '나쁨';
+            }else{
+                return "위험";
+            }
+        };
+
+        window.onload = function() {
+            document.getElementById("myLink").innerHTML=pm10status( {{pm10.seoul}} );
+            document.getElementById("myLink1").innerHTML=pm10status({{pm10.busan}});
+            document.getElementById("myLink2").innerHTML=pm10status( {{pm10.daegu}} );
+            document.getElementById("myLink3").innerHTML=pm10status({{pm10.incheon}});
+            document.getElementById("myLink4").innerHTML=pm10status( {{pm10.gwangju}} );
+            document.getElementById("myLink5").innerHTML=pm10status({{pm10.daejeon}});
+            document.getElementById("myLink6").innerHTML=pm10status( {{pm10.ulsan}} );
+            document.getElementById("myLink7").innerHTML=pm10status({{pm10.gyeonggi}});
+            document.getElementById("myLink8").innerHTML=pm10status( {{pm10.gangwon}} );
+            document.getElementById("myLink9").innerHTML=pm10status({{pm10.chungbuk}});
+            document.getElementById("myLink10").innerHTML=pm10status( {{pm10.chungnam}} );
+            document.getElementById("myLink11").innerHTML=pm10status({{pm10.jeonbuk}});
+            document.getElementById("myLink12").innerHTML=pm10status( {{pm10.jeonnam}} );
+            document.getElementById("myLink13").innerHTML=pm10status({{pm10.gyeongbuk}});
+            document.getElementById("myLink14").innerHTML=pm10status( {{pm10.gyeongnam}} );
+            document.getElementById("myLink15").innerHTML=pm10status({{pm10.jeju}});
+            document.getElementById("myLink16").innerHTML=pm10status( {{pm10.sejong}} );
+
+            document.getElementById("pm10status").innerHTML=pm10status( {{pm25.seoul}} );
+            document.getElementById("pm10status1").innerHTML=pm10status({{pm25.busan}});
+            document.getElementById("pm10status2").innerHTML=pm10status( {{pm25.daegu}} );
+            document.getElementById("pm10status3").innerHTML=pm10status({{pm25.incheon}});
+            document.getElementById("pm10status").innerHTML=pm10status( {{pm25.gwangju}} );
+            document.getElementById("pm10status5").innerHTML=pm10status({{pm25.daejeon}});
+            document.getElementById("pm10status6").innerHTML=pm10status( {{pm25.ulsan}} );
+            document.getElementById("pm10status7").innerHTML=pm10status({{pm25.gyeonggi}});
+            document.getElementById("pm10status8").innerHTML=pm10status( {{pm25.gangwon}} );
+            document.getElementById("pm10status9").innerHTML=pm10status({{pm25.chungbuk}});
+            document.getElementById("pm10status10").innerHTML=pm10status( {{pm25.chungnam}} );
+            document.getElementById("pm10status11").innerHTML=pm10status({{pm25.jeonbuk}});
+            document.getElementById("pm10status12").innerHTML=pm10status( {{pm25.jeonnam}} );
+            document.getElementById("pm10status13").innerHTML=pm10status({{pm25.gyeongbuk}});
+            document.getElementById("pm10status14").innerHTML=pm10status( {{pm25.gyeongnam}} );
+            document.getElementById("pm10status15").innerHTML=pm10status({{pm25.jeju}});
+            document.getElementById("pm10status16").innerHTML=pm10status( {{pm25.sejong}} );
         }
-
-        a=decideColor(170);
-
-
+        
         var data = [
-            [37.5665, 126.9780, '<div style="padding:5px;">미세먼지: {{ pm10.seoul }}<br>초미세먼지: {{ pm25.seoul }}<br> 서울 </div>'],
-            [35.1796, 129.0756, '<div style="padding:5px;">미세먼지: {{ pm10.busan }}<br>초미세먼지: {{ pm25.busan }}<br> 부산 </div>'],
-            [35.8714, 128.6014, '<div style="padding:5px;">미세먼지: {{ pm10.daegu }}<br>초미세먼지: {{ pm25.daegu }}<br> 대구 </div>'],
-            [37.4563, 126.7052, '<div style="padding:5px;">미세먼지: {{ pm10.incheon }}<br>초미세먼지: {{ pm25.incheon }}<br> 인천 </div>'],
-            [35.1595, 126.8526, '<div style="padding:5px;">미세먼지: {{ pm10.gwangju }}<br>초미세먼지: {{ pm25.gwangju }}<br> 광주 </div>'],
-            [36.3504, 127.3845, '<div style="padding:5px;">미세먼지: {{ pm10.daejeon }}<br>초미세먼지: {{ pm25.daejeon }}<br> 대전 </div>'],
-            [35.5384, 129.3114, '<div style="padding:5px;">미세먼지: {{ pm10.ulsan }}<br>초미세먼지: {{ pm25.ulsan }}<br> 울산 </div>'],
-            [37.4138, 127.5183, '<div style="padding:5px;">미세먼지: {{ pm10.gyeonggi }}<br>초미세먼지: {{ pm25.gyeonggi }}<br> 경기 </div>'],
-            [37.8228, 128.1555, '<div style="padding:5px;">미세먼지: {{ pm10.gangwon }}<br>초미세먼지: {{ pm25.gangwon }}<br> 강원 </div>'],
-            [36.8000, 127.7000, '<div style="padding:5px;">미세먼지: {{ pm10.chungbuk }}<br>초미세먼지: {{ pm25.chungbuk }}<br> 충북 </div>'],
-            [36.5623, 126.9541, '<div style="padding:5px;">미세먼지: {{ pm10.chungnam }}<br>초미세먼지: {{ pm25.chungnam }}<br> 충남 </div>'],
-            [35.7175, 127.1530, '<div style="padding:5px;">미세먼지: {{ pm10.jeonbuk }}<br>초미세먼지: {{ pm25.jeonbuk }}<br> 전북 </div>'],
-            [34.8679, 126.9910, '<div style="padding:5px;">미세먼지: {{ pm10.jeonnam }}<br>초미세먼지: {{ pm25.jeonnam }}<br> 전남 </div>'],
-            [36.4919, 128.8889, '<div style="padding:5px;">미세먼지: {{ pm10.gyeongbuk }}<br>초미세먼지: {{ pm25.gyeongbuk }}<br> 경북 </div>'],
-            [35.4606, 128.2132, '<div style="padding:5px;">미세먼지: {{ pm10.gyeongnam }}<br>초미세먼지: {{ pm25.gyeongnam }}<br> 경남 </div>'],
-            [33.4996, 126.5312, '<div style="padding:5px;">미세먼지: {{ pm10.jeju }}<br>초미세먼지: {{ pm25.jeju }}<br> 제주 </div>'],
-            [36.48750, 127.28167, '<div style="padding:5px;">미세먼지: {{ pm10.sejong }}<br>초미세먼지: {{ pm25.sejong }}<br> 세종 </div>']
+            [37.5665, 126.9780, '<div style="padding:5px;">서울 <br>미세먼지:  {{ pm10.seoul }},<div style="display: inline", id="myLink"></div><br>초미세먼지:{{ pm25.seoul }},<div style="display: inline", id="pm10status"></div></div>'],
+            [35.1796, 129.0756, '<div style="padding:5px;font-size:15px">부산 <br>미세먼지: {{ pm10.busan }},<div style="display: inline", id="myLink1"></div><br>초미세먼지: {{ pm25.busan }},<div style="display: inline", id="pm10status1"></div></div>'],
+            [35.8714, 128.6014, '<div style="padding:5px;font-size:15px">대구 <br>미세먼지: {{ pm10.daegu }},<div style="display: inline", id="myLink2"></div><br>초미세먼지: {{ pm25.daegu }},<div style="display: inline", id="pm10status2"></div></div>'],
+            [37.4563, 126.7052, '<div style="padding:5px;font-size:15px">인천 <br>미세먼지: {{ pm10.incheon }},<div style="display: inline", id="myLink3"></div><br>초미세먼지: {{ pm25.incheon }},<div style="display: inline", id="pm10status3"></div></div>'],
+            [35.1595, 126.8526, '<div style="padding:5px;font-size:15px">광주 <br>미세먼지: {{ pm10.gwangju }},<div style="display: inline", id="myLink4"></div><br>초미세먼지: {{ pm25.gwangju }},<div style="display: inline", id="pm10status4"></div></div>'],
+            [36.3504, 127.3845, '<div style="padding:5px;font-size:15px">대전 <br>미세먼지: {{ pm10.daejeon }},<div style="display: inline", id="myLink5"></div><br>초미세먼지: {{ pm25.daejeon }},<div style="display: inline", id="pm10status5"></div></div>'],
+            [35.5384, 129.3114, '<div style="padding:5px;font-size:15px">울산 <br>미세먼지: {{ pm10.ulsan }},<div style="display: inline", id="myLink6"></div><br>초미세먼지: {{ pm25.ulsan }},<div style="display: inline", id="pm10status6"></div></div>'],
+            [37.4138, 127.5183, '<div style="padding:5px;font-size:15px">경기 <br>미세먼지: {{ pm10.gyeonggi }},<div style="display: inline", id="myLink7"></div><br>초미세먼지: {{ pm25.gyeonggi }},<div style="display: inline", id="pm10status7"></div></div>'],
+            [37.8228, 128.1555, '<div style="padding:5px;font-size:15px">강원 <br>미세먼지: {{ pm10.gangwon }},<div style="display: inline", id="myLink8"></div><br>초미세먼지: {{ pm25.gangwon }},<div style="display: inline", id="pm10status8"></div></div>'],
+            [36.8000, 127.7000, '<div style="padding:5px;font-size:15px">충북 <br>미세먼지: {{ pm10.chungbuk }},<div style="display: inline", id="myLink9"></div><br>초미세먼지: {{ pm25.chungbuk }},<div style="display: inline", id="pm10status9"></div></div>'],
+            [36.5623, 126.9541, '<div style="padding:5px;font-size:15px">충남 <br>미세먼지: {{ pm10.chungnam }},<div style="display: inline", id="myLink10"></div><br>초미세먼지: {{ pm25.chungnam }},<div style="display: inline", id="pm10status10"></div></div>'],
+            [35.7175, 127.1530, '<div style="padding:5px;font-size:15px">전북 <br>미세먼지: {{ pm10.jeonbuk }},<div style="display: inline", id="myLink11"></div><br>초미세먼지: {{ pm25.jeonbuk }},<div style="display: inline", id="pm10status11"></div></div>'],
+            [34.8679, 126.9910, '<div style="padding:5px;font-size:15px">전남 <br>미세먼지: {{ pm10.jeonnam }},<div style="display: inline", id="myLink12"></div><br>초미세먼지: {{ pm25.jeonnam }},<div style="display: inline", id="pm10status12"></div></div>'],
+            [36.4919, 128.8889, '<div style="padding:5px;font-size:15px">경북 <br>미세먼지: {{ pm10.gyeongbuk }},<div style="display: inline", id="myLink13"></div><br>초미세먼지: {{ pm25.gyeongbuk }},<div style="display: inline", id="pm10status13"></div></div>'],
+            [35.4606, 128.2132, '<div style="padding:5px;font-size:15px">경남 <br>미세먼지: {{ pm10.gyeongnam }},<div style="display: inline", id="myLink14"></div><br>초미세먼지: {{ pm25.gyeongnam }},<div style="display: inline", id="pm10status14"></div></div>'],
+            [33.4996, 126.5312, '<div style="padding:5px;font-size:15px">제주 <br>미세먼지: {{ pm10.jeju }},<div style="display: inline", id="myLink15"></div><br>초미세먼지: {{ pm25.jeju }},<div style="display: inline", id="pm10status15"></div></div>'],
+            [36.48750, 127.28167, '<div style="padding:5px;font-size:15px">세종 <br>미세먼지: {{ pm10.sejong }},<div style="display: inline", id="myLink16"></div><br>초미세먼지: {{ pm25.sejong }},<div style="display: inline", id="pm10status16"></div></div>']
         ]
         
         var markers = [];
@@ -99,6 +146,6 @@
 
 
     </script>
-
+    
 </body>
 </html>
