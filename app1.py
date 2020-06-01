@@ -16,10 +16,17 @@ def index():
     SearchCond = "&searchCondition=MONTH" #MONTH or WEEK
     NumofRows = "&numOfRows=1"
     Service = "&ServiceKey=" + serviceKey
-    URI = URI + ItemCode + DataGubun + SearchCond + NumofRows + Service
-    response = requests.get(URI)
+    URI_pm10 = URI + ItemCode + DataGubun + SearchCond + NumofRows + Service
+    response = requests.get(URI_pm10)
 
     soup = BeautifulSoup(response.text, 'html.parser')
+
+    #pm25 
+    ItemCode = "itemCode=PM25" #PM10 = 초미세먼지
+    URI_pm25 = URI + ItemCode + DataGubun + SearchCond + NumofRows + Service
+    response_pm25 = requests.get(URI_pm25)
+
+    soup25 = BeautifulSoup(response_pm25.text, 'html.parser')
 
     pm10 = {
         'seoul' : soup.find('seoul').text,
@@ -42,4 +49,24 @@ def index():
     }
 
 
-    return render_template('index.html',pm10=pm10)
+    pm25 = {
+        'seoul' : soup25.find('seoul').text,
+        'busan' : soup25.find('busan').text,
+        'daegu' : soup25.find('daegu').text,
+        'incheon' : soup25.find('incheon').text,
+        'gwangju' : soup25.find('gwangju').text,
+        'daejeon' : soup25.find('daejeon').text,
+        'ulsan' : soup25.find('ulsan').text,
+        'gyeonggi' : soup25.find('gyeonggi').text,
+        'gangwon' : soup25.find('gangwon').text,
+        'chungbuk' : soup25.find('chungbuk').text,
+        'chungnam' : soup25.find('chungnam').text,
+        'jeonbuk' : soup25.find('jeonbuk').text,
+        'jeonnam' : soup25.find('jeonnam').text,
+        'gyeongbuk' : soup25.find('gyeongbuk').text,
+        'gyeongnam' : soup25.find('gyeongnam').text,
+        'jeju' : soup25.find('jeju').text,
+        'sejong' : soup25.find('sejong').text
+    }
+
+    return render_template('index.html',pm10=pm10, pm25=pm25)

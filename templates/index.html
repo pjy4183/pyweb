@@ -2,7 +2,8 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>다음 지도 API</title>
+    <title>다음 지도 API</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
 </head>
 <body>
 	<div id="map" style="width:50%;height:100vh;"></div>
@@ -26,24 +27,39 @@
             minLevel: 10 //클러스터 할 최소 지도 레벨
         });
 
+        function decideColor(num){
+            if (num<=30){
+                return '훌륭';
+            }else if(num<=80){
+                return'좋음';
+            }else if(num<=150){
+                return '나쁨';
+            }else{
+                return "위험";
+            }
+        }
+
+        a=decideColor(170);
+
+
         var data = [
-            [37.5665, 126.9780, '<div style="padding:5px;">{{ pm10.seoul }} 서울 </div>'],
-            [35.1796, 129.0756, '<div style="padding:5px;">{{ pm10.busan }} 부산 </div>'],
-            [35.8714, 128.6014, '<div style="padding:5px;">{{ pm10.daegu }} 대구 </div>'],
-            [37.4563, 126.7052, '<div style="padding:5px;">{{ pm10.incheon }} 인천 </div>'],
-            [35.1595, 126.8526, '<div style="padding:5px;">{{ pm10.gwangju }} 광주 </div>'],
-            [36.3504, 127.3845, '<div style="padding:5px;">{{ pm10.daejeon }} 대전 </div>'],
-            [35.5384, 129.3114, '<div style="padding:5px;">{{ pm10.ulsan }} 울산 </div>'],
-            [37.4138, 127.5183, '<div style="padding:5px;">{{ pm10.gyeonggi }} 경기 </div>'],
-            [37.8228, 128.1555, '<div style="padding:5px;">{{ pm10.gangwon }} 강원 </div>'],
-            [36.8000, 127.7000, '<div style="padding:5px;">{{ pm10.chungbuk }} 충북 </div>'],
-            [36.5623, 126.9541, '<div style="padding:5px;">{{ pm10.chungnam }} 충남 </div>'],
-            [35.7175, 127.1530, '<div style="padding:5px;">{{ pm10.jeonbuk }} 전북 </div>'],
-            [34.8679, 126.9910, '<div style="padding:5px;">{{ pm10.jeonnam }} 전남 </div>'],
-            [36.4919, 128.8889, '<div style="padding:5px;">{{ pm10.gyeongbuk }} 경북 </div>'],
-            [35.4606, 128.2132, '<div style="padding:5px;">{{ pm10.gyeongnam }} 경남 </div>'],
-            [33.4996, 126.5312, '<div style="padding:5px;">{{ pm10.jeju }} 제주 </div>'],
-            [36.48750, 127.28167, '<div style="padding:5px;">{{ pm10.sejong }} 세종 </div>']
+            [37.5665, 126.9780, '<div style="padding:5px;">미세먼지: {{ pm10.seoul }}<br>초미세먼지: {{ pm25.seoul }}<br> 서울 </div>'],
+            [35.1796, 129.0756, '<div style="padding:5px;">미세먼지: {{ pm10.busan }}<br>초미세먼지: {{ pm25.busan }}<br> 부산 </div>'],
+            [35.8714, 128.6014, '<div style="padding:5px;">미세먼지: {{ pm10.daegu }}<br>초미세먼지: {{ pm25.daegu }}<br> 대구 </div>'],
+            [37.4563, 126.7052, '<div style="padding:5px;">미세먼지: {{ pm10.incheon }}<br>초미세먼지: {{ pm25.incheon }}<br> 인천 </div>'],
+            [35.1595, 126.8526, '<div style="padding:5px;">미세먼지: {{ pm10.gwangju }}<br>초미세먼지: {{ pm25.gwangju }}<br> 광주 </div>'],
+            [36.3504, 127.3845, '<div style="padding:5px;">미세먼지: {{ pm10.daejeon }}<br>초미세먼지: {{ pm25.daejeon }}<br> 대전 </div>'],
+            [35.5384, 129.3114, '<div style="padding:5px;">미세먼지: {{ pm10.ulsan }}<br>초미세먼지: {{ pm25.ulsan }}<br> 울산 </div>'],
+            [37.4138, 127.5183, '<div style="padding:5px;">미세먼지: {{ pm10.gyeonggi }}<br>초미세먼지: {{ pm25.gyeonggi }}<br> 경기 </div>'],
+            [37.8228, 128.1555, '<div style="padding:5px;">미세먼지: {{ pm10.gangwon }}<br>초미세먼지: {{ pm25.gangwon }}<br> 강원 </div>'],
+            [36.8000, 127.7000, '<div style="padding:5px;">미세먼지: {{ pm10.chungbuk }}<br>초미세먼지: {{ pm25.chungbuk }}<br> 충북 </div>'],
+            [36.5623, 126.9541, '<div style="padding:5px;">미세먼지: {{ pm10.chungnam }}<br>초미세먼지: {{ pm25.chungnam }}<br> 충남 </div>'],
+            [35.7175, 127.1530, '<div style="padding:5px;">미세먼지: {{ pm10.jeonbuk }}<br>초미세먼지: {{ pm25.jeonbuk }}<br> 전북 </div>'],
+            [34.8679, 126.9910, '<div style="padding:5px;">미세먼지: {{ pm10.jeonnam }}<br>초미세먼지: {{ pm25.jeonnam }}<br> 전남 </div>'],
+            [36.4919, 128.8889, '<div style="padding:5px;">미세먼지: {{ pm10.gyeongbuk }}<br>초미세먼지: {{ pm25.gyeongbuk }}<br> 경북 </div>'],
+            [35.4606, 128.2132, '<div style="padding:5px;">미세먼지: {{ pm10.gyeongnam }}<br>초미세먼지: {{ pm25.gyeongnam }}<br> 경남 </div>'],
+            [33.4996, 126.5312, '<div style="padding:5px;">미세먼지: {{ pm10.jeju }}<br>초미세먼지: {{ pm25.jeju }}<br> 제주 </div>'],
+            [36.48750, 127.28167, '<div style="padding:5px;">미세먼지: {{ pm10.sejong }}<br>초미세먼지: {{ pm25.sejong }}<br> 세종 </div>']
         ]
         
         var markers = [];
@@ -64,24 +80,10 @@
             // 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
             infowindow.open(map, marker);
             markers.push(marker);
-            kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
-            kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
         }
         // 클러스터러에 마커들을 추가
         clusterer.addMarkers(markers);
         
-        function makeOverListener(map, marker, infowindow) {
-            return function() {
-                infowindow.open(map, marker);
-            };
-        }
-
-        // 인포윈도우를 닫는 클로저를 만드는 함수입니다 
-        function makeOutListener(infowindow) {
-            return function() {
-                infowindow.close();
-            };
-        }
 
         // 지도 타입 변경 컨트롤을 생성한다
 		var mapTypeControl = new kakao.maps.MapTypeControl();
@@ -95,8 +97,8 @@
         // 지도의 우측에 확대 축소 컨트롤을 추가한다
         map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
-        
 
-	</script>
+    </script>
+
 </body>
 </html>
