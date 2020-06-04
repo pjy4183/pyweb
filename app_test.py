@@ -2,6 +2,7 @@ import requests
 from flask import Flask, render_template, request, redirect, url_for, flash
 from bs4 import BeautifulSoup
 from flask_sqlalchemy import SQLAlchemy
+from string import Template
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
@@ -20,6 +21,7 @@ def get_weather_data(city):
     r = requests.get(url).json()
     return r
 
+pm10_1={}
 
 @app.route('/')
 def index():
@@ -82,7 +84,7 @@ def index():
         'jeju' : soup25.find('jeju').text,
         'sejong' : soup25.find('sejong').text
     }
-
+    pm10_1 = pm10
     return render_template('index.html', pm10=pm10, pm25=pm25)
 
 
@@ -143,3 +145,83 @@ def delete_city(name):
 
     flash(f'Successfully deleted { city.name }', 'success')
     return redirect(url_for('index_get'))
+
+
+
+
+
+
+
+
+
+f = open('./templates/template.html', 'rt', encoding='UTF8')
+f_read = f.read()
+
+# HTML_TEMPLATE = Template(f_read) #밑에 코드 대신 이 코드로 대체 가능
+HTML_TEMPLATE = Template('''
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>서울 정보</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+        .nav-distance{
+            padding: 1.0% 5.2%;
+            background-color:rgba(217, 246, 102, 0.5);
+        }
+  
+        .navbar-light .navbar-brand{
+            font-family: NanumSquareR;
+            line-height: 1.68;
+            text-align: left;
+            color: #35465d;
+        }
+    </style>
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light nav-distance">
+        <a class="navbar-brand" href="/">Weather</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/templates/weather.html">Search</a>
+            </li>
+            
+          </ul>
+        </div>
+      </nav>
+      
+    ${place_name} 정보 
+    f{{pm10.seoul}}
+    {%pokemon.a%}
+
+</body>
+</html>
+''')
+
+
+@app.route('/templates/<some_place>')
+def some_place_page(some_place):
+    
+    return(HTML_TEMPLATE.substitute(place_name=some_place))
+
+
+
+@app.route('/templates/<some_place>')
+def americano():
+    pokemon = {
+        'a': 1,
+        'b': 2,
+        'c':3
+    }
+    pm10 = pm10_1
+    return render_template('some_place', pm10_1=pm10_1,pokemon=pokemon)
+
+
