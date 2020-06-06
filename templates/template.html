@@ -36,9 +36,15 @@
           </ul>
         </div>
       </nav>
-      
-    ${place_name} 정보
-    {{ pm10.${place_name} }}
+    
+    {{ place_name}}<br>
+    도시이름: {{weather.city}}<br>
+    강수 형태: {{ weather.rainType }} <br>
+    습도: {{weather.humidity}}<br>
+    강우량: {{weather.ratio}}<br>
+    기온: {{weather.temperature}}<br>
+    풍속: {{weather.windspeed}}<br>
+    
 
 </body>
 </html>

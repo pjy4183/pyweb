@@ -1,8 +1,11 @@
+# -- coding: utf-8 --
 import requests
 from flask import Flask, render_template, request, redirect, url_for, flash
 from bs4 import BeautifulSoup
 from flask_sqlalchemy import SQLAlchemy
 from string import Template
+import datetime
+import pytz
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
@@ -10,18 +13,21 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///weather.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'thisisasecret'
 
+
 db = SQLAlchemy(app)
+
 
 class City(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
+
+
 
 def get_weather_data(city):
     url = f'https://api.openweathermap.org/data/2.5/weather?q={ city }&units=imperial&appid=f69167b991bfeed068e309a6b69cd883'
     r = requests.get(url).json()
     return r
 
-pm10_1={}
 
 @app.route('/')
 def index():
@@ -84,8 +90,10 @@ def index():
         'jeju' : soup25.find('jeju').text,
         'sejong' : soup25.find('sejong').text
     }
-    pm10_1 = pm10
+
     return render_template('index.html', pm10=pm10, pm25=pm25)
+
+
 
 
 @app.route('/templates/weather.html')
@@ -146,82 +154,117 @@ def delete_city(name):
     flash(f'Successfully deleted { city.name }', 'success')
     return redirect(url_for('index_get'))
 
-
-
-
-
-
-
-
-
-f = open('./templates/template.html', 'rt', encoding='UTF8')
-f_read = f.read()
-
-# HTML_TEMPLATE = Template(f_read) #밑에 코드 대신 이 코드로 대체 가능
-HTML_TEMPLATE = Template('''
-<!DOCTYPE html>
-<head>
-    <meta charset="utf-8">
-    <title>서울 정보</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <style>
-        .nav-distance{
-            padding: 1.0% 5.2%;
-            background-color:rgba(217, 246, 102, 0.5);
-        }
-  
-        .navbar-light .navbar-brand{
-            font-family: NanumSquareR;
-            line-height: 1.68;
-            text-align: left;
-            color: #35465d;
-        }
-    </style>
-</head>
-<body>
-    
-    <nav class="navbar navbar-expand-lg navbar-light nav-distance">
-        <a class="navbar-brand" href="/">Weather</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item active">
-              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/templates/weather.html">Search</a>
-            </li>
-            
-          </ul>
-        </div>
-      </nav>
-      
-    ${place_name} 정보 
-    f{{pm10.seoul}}
-    {%pokemon.a%}
-
-</body>
-</html>
-''')
-
-
 @app.route('/templates/<some_place>')
 def some_place_page(some_place):
-    
-    return(HTML_TEMPLATE.substitute(place_name=some_place))
+    nx, ny = get_city_name(some_place)
+    nx = "&nx=" + nx
+    ny = "&ny=" + ny
+    URI = get_kor_weather_API(nx, ny)
+    r = requests.get(URI)
+
+    soup = BeautifulSoup(r.text, 'html.parser')
+    Itemlist = soup.findAll('item')
+    data = ITEMLIST(Itemlist)
 
 
-
-@app.route('/templates/<some_place>')
-def americano():
-    pokemon = {
-        'a': 1,
-        'b': 2,
-        'c':3
+    weather = {
+        'city' : some_place,
+        'rainType' : data[1],
+        'humidity' : data[3],
+        'ratio': data[5],
+        'temperature' : data[7],
+        'windspeed' : data[9]
     }
-    pm10 = pm10_1
-    return render_template('some_place', pm10_1=pm10_1,pokemon=pokemon)
+
+
+    return render_template('template.html', place_name=some_place, weather=weather)
+
+
+def get_kor_weather_API(nx, ny):
+    currentdate = datetime.datetime.now(tz=pytz.timezone('Asia/Seoul')).strftime('%Y%m%d')
+    currenthour = datetime.datetime.now(tz=pytz.timezone('Asia/Seoul')).strftime('%H')
+    currentminute = datetime.datetime.now(tz=pytz.timezone('Asia/Seoul')).strftime('%M')
+
+    if int(currentminute) >= 30:
+        pass
+    elif int(currentminute) < 30:
+        currenthour = int(currenthour) - 1
+    if len(str(currenthour)) < 2:
+        currenthour = "0" + str(currenthour)
+
+
+    URI = "http://apis.data.go.kr/1360000/VilageFcstInfoService/getUltraSrtNcst?"
+    serviceKey = "oH7Ka3pHFV6tlkknSOGHpi5zCFaWyWUHC1MXmLCrwosu5D%2Bw9Xun%2BI25lqyLs4Vhls178qpID%2B2WNWB%2F6h%2Bywg%3D%3D"
+    base_date = "base_date=" + str(currentdate)
+    base_time = "&base_time=" + str(currenthour) + "00"
+    numOfRows = "&numOfRows=10"
+    pageNo = "&pageNo=1"
+    Service = "&ServiceKey=" + str(serviceKey)
+    URI = URI + base_date + base_time + nx + ny + numOfRows + pageNo + Service
+
+    return URI
+
+def ITEMLIST(Itemlist):
+    weather = []
+    for item in Itemlist:
+        category = item.find("category").text #날씨코드
+        obsValue = item.find("obsrvalue").text
+
+        if category == "PTY": #강수형태
+            # (없음(0), 비(1), 비 / 눈(2), 눈(3), 소나기(4) 여기서 비 / 눈은 비와 눈이 섞여 오는 것을 의미 (진눈개비))
+            obsValue = item.find("obsrvalue").text
+            weather.append('강수형태')
+            if obsValue == '0':
+                weather.append('없음')
+            elif obsValue == '1':
+                weather.append('진눈개비')
+            elif obsValue == '2':
+                weather.append('눈')
+            elif obsValue == '3':
+                weather.append('소나기')
+        elif category == "REH": #습도
+            obsValue = item.find("obsrvalue").text
+            weather.append('습도')
+            weather.append(obsValue + '%')
+        elif category == "RN1": #1시간 강우량
+            obsValue = item.find("obsrvalue").text
+            weather.append('강우량')
+            weather.append(obsValue + 'mm')
+        elif category == "T1H": #기온
+            obsValue = item.find("obsrvalue").text
+            weather.append('기온')
+            weather.append(obsValue + 'C')
+        elif category == "WSD": #풍속
+            obsValue = item.find("obsrvalue").text
+            weather.append('풍속')
+            weather.append(obsValue + 'm/s')
+        else:
+            continue
+    return weather
+
+def get_city_name(some_place):
+    location = [['60', '127', 'seoul'], #서울
+                ['98', '76', 'busan'], #부산
+                ['89', '90', 'daegu'], #대구
+                ['55', '124', 'incheon'], #인천
+                ['58', '74','gwangju'], #광주
+                ['67', '100','daejeon'], #대전
+                ['102', '84','ulsan'], #울산
+                ['60', '120','gyeonggi'], #경기도
+                ['73', '134','gangwon'], #강원도
+                ['69', '107''chungbuk'], #충북
+                ['68', '100','chungnam'], #충남
+                ['63', '89','jeonbuk'], #전북
+                ['51', '67''jeonnam'], #전남
+                ['89', '91','gyeongbuk'], #경북
+                ['91', '77','gyeongnam'], #경남
+                ['52', '38','jeju'], #제주
+                ['66', '103','sejong'], #세종
+                ]
+
+    for i in location:
+        if (i[2] == some_place):
+            return i[0], i[1] 
+
 
 
