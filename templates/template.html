@@ -6,7 +6,7 @@
     <style>
         .nav-distance{
             padding: 1.0% 5.2%;
-            background-color:rgba(217, 246, 102, 0.5);
+            background-color:rgba(0, 0, 0, 0.3);
         }
   
         .navbar-light .navbar-brand{
@@ -30,7 +30,7 @@
               <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/templates/weather.html">Search</a>
+              <a class="nav-link" href="/templates/weather.html">World weather Search</a>
             </li>
             
           </ul>
@@ -44,6 +44,9 @@
     강우량: {{weather.ratio}}<br>
     기온: {{weather.temperature}}<br>
     풍속: {{weather.windspeed}}<br>
+    <figure class="image is-50x50">
+        <img src="http://openweathermap.org/img/w/{{ weather2.icon }}.png" alt="Image">
+    </figure>
     
 
 </body>

@@ -100,7 +100,7 @@ def index():
 def index_get():
     cities = City.query.all()
 
-    weather_data = []
+    weather_data=[]
 
     for city in cities:
         r = get_weather_data(city.name)
@@ -165,8 +165,7 @@ def some_place_page(some_place):
     soup = BeautifulSoup(r.text, 'html.parser')
     Itemlist = soup.findAll('item')
     data = ITEMLIST(Itemlist)
-
-
+    
     weather = {
         'city' : some_place,
         'rainType' : data[1],
@@ -176,8 +175,16 @@ def some_place_page(some_place):
         'windspeed' : data[9]
     }
 
+    r = get_weather_data(some_place)
+    weather2 = {
+        'city' : some_place,
+        'temperature' : r['main']['temp'],
+        'description' : r['weather'][0]['description'],
+        'icon' : r['weather'][0]['icon'],
+    }
 
-    return render_template('template.html', place_name=some_place, weather=weather)
+    return render_template('template.html', place_name=some_place, weather=weather, weather2=weather2)
+
 
 
 def get_kor_weather_API(nx, ny):
@@ -252,10 +259,10 @@ def get_city_name(some_place):
                 ['102', '84','ulsan'], #울산
                 ['60', '120','gyeonggi'], #경기도
                 ['73', '134','gangwon'], #강원도
-                ['69', '107''chungbuk'], #충북
+                ['69', '107','chungbuk'], #충북
                 ['68', '100','chungnam'], #충남
                 ['63', '89','jeonbuk'], #전북
-                ['51', '67''jeonnam'], #전남
+                ['51', '67','jeonnam'], #전남
                 ['89', '91','gyeongbuk'], #경북
                 ['91', '77','gyeongnam'], #경남
                 ['52', '38','jeju'], #제주
