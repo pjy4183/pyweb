@@ -8,39 +8,36 @@
     <title>What's the weather like?</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <style>
-    .nav-distance{
-      padding: 1.0% 5.2%;
-      background-color:rgba(217, 246, 102, 0.5);
-    }
-
-    .navbar-light .navbar-brand{
-      font-family: NanumSquareR;
-      line-height: 1.68;
-      text-align: left;
-      color: #35465d;
-    }
-    </style>
+    
+	<!-- Loading main css file -->
+	<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
+        
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light nav-distance">
-        <a class="navbar-brand" href="/">Weather</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item active">
-              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/templates/weather.html">World weather Search</a>
-            </li>
-            
-          </ul>
+    <div class="site-header">
+        <div class="container">
+            <a href="/" class="branding">
+                <img src="/static/images/logo.png" alt="" class="logo">
+                <div class="logo-type">
+                    <h1 class="site-title">Finding Kor Weather</h1>
+                    <small class="site-description">Finding weather of Korean main cities</small>
+                </div>
+            </a>
+
+            <!-- Default snippet for navigation -->
+            <div class="main-navigation">
+                <button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
+                <ul class="menu">
+                    <li class="menu-item"><a href="/">Home</a></li>
+                    <li class="menu-item"><a href="/templates/weather.html">World weather Search</a></li>
+                </ul> <!-- .menu -->
+            </div> <!-- .main-navigation -->
+
+            <div class="mobile-navigation"></div>
+
         </div>
-      </nav>
+    </div> <!-- .site-header -->
     
     <section class="section">
         <div class="container">

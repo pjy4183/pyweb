@@ -24,11 +24,11 @@
 		<div class="site-content">
 			<div class="site-header">
 				<div class="container">
-					<a href="/static/index.html" class="branding">
+					<a href="/" class="branding">
 						<img src="/static/images/logo.png" alt="" class="logo">
 						<div class="logo-type">
-							<h1 class="site-title">Company name</h1>
-							<small class="site-description">tagline goes here</small>
+							<h1 class="site-title">Finding Kor Weather</h1>
+							<small class="site-description">Finding weather of Korean main cities</small>
 						</div>
 					</a>
 
@@ -36,11 +36,8 @@
 					<div class="main-navigation">
 						<button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
 						<ul class="menu">
-							<li class="menu-item current-menu-item"><a href="index.html">Home</a></li>
-							<li class="menu-item"><a href="news.html">News</a></li>
-							<li class="menu-item"><a href="live-cameras.html">Live cameras</a></li>
-							<li class="menu-item"><a href="photos.html">Photos</a></li>
-							<li class="menu-item"><a href="contact.html">Contact</a></li>
+							<li class="menu-item"><a href="/">Home</a></li>
+							<li class="menu-item"><a href="/templates/weather.html">World weather Search</a></li>
 						</ul> <!-- .menu -->
 					</div> <!-- .main-navigation -->
 
@@ -77,14 +74,16 @@
 								<div class="degree">
 									<div class="num">{{weather2.temperature}}<sup>o</sup>C</div>
 									<div class="forecast-icon">
-                                        <img src="/static/images/icons/{{weather2.description}}.svg" alt="" width=90>
+                                        <img src="/static/images/icons/{{weather2.description}}.svg" alt="" width=90 
+                                        style="position: relative;left: 28px;">
                                     </div>	
-                                    <div id="description" style="text-align: center;padding-top: 0px;position: relative;
+                                    <div id="description" style="text-align: right;position: relative;
                                     bottom: 20px;">{{weather2.description}}</div>
 								</div>
 								<span><img src="/static/images/icon-umberella.png" alt="">{{weather.ratio}}</span>
 								<span><img src="/static/images/icon-wind.png" alt="">{{weather.windspeed}}</span>
-								<span><img src="/static/images/icon-compass.png" alt="">East</span>
+                                <span><img src="/static/images/icon-humidity.png" alt="">{{weather.humidity}}</span>
+                                <div style="font-size: 8px;display: inline;position:relative;right:18px">(<a target="_blank" href="https://icons8.com/icons/set/humidity" >Humidity icon</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>)</div>
 							</div>
 						</div>
 						<div class="forecast">
@@ -129,7 +128,7 @@
 							</div> <!-- .forecast-header -->
 							<div class="forecast-content">
 								<div class="forecast-icon">
-									<img src="/static/images/icons/icon-12.svg" alt="" width=48>
+									<img src="/static/images/icons/icon-7.svg" alt="" width=48>
 								</div>
 								<div class="degree">23<sup>o</sup>C</div>
 								<small>18<sup>o</sup></small>
@@ -141,7 +140,7 @@
 							</div> <!-- .forecast-header -->
 							<div class="forecast-content">
 								<div class="forecast-icon">
-									<img src="/static/images/icons/icon-13.svg" alt="" width=48>
+									<img src="/static/images/icons/icon-7.svg" alt="" width=48>
 								</div>
 								<div class="degree">23<sup>o</sup>C</div>
 								<small>18<sup>o</sup></small>
@@ -153,7 +152,7 @@
 							</div> <!-- .forecast-header -->
 							<div class="forecast-content">
 								<div class="forecast-icon">
-									<img src="/static/images/icons/icon-14.svg" alt="" width=48>
+									<img src="/static/images/icons/icon-7.svg" alt="" width=48>
 								</div>
 								<div class="degree">23<sup>o</sup>C</div>
 								<small>18<sup>o</sup></small>
@@ -192,10 +191,10 @@
 
 						<div class="col-md-3 col-md-offset-1" >
 							<div class="social-links">
+								<a href="#"><i class="fa fa-github"></i></a>
+								<a href="#"><i class="fa fa-linkedin"></i></a>
 								<a href="#"><i class="fa fa-facebook"></i></a>
-								<a href="#"><i class="fa fa-twitter"></i></a>
-								<a href="#"><i class="fa fa-google-plus"></i></a>
-								<a href="#"><i class="fa fa-pinterest"></i></a>
+								<a href="#"><i class="fa fa-instagram"></i></a>
 							</div>
 						</div>
 					</div>
