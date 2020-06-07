@@ -91,9 +91,37 @@ def index():
         'sejong' : soup25.find('sejong').text
     }
 
-    return render_template('index.html', pm10=pm10, pm25=pm25)
+    weather_data = {
+        'seoul' : get_weather('seoul'),
+        'busan' : get_weather('busan'),
+        'daegu' : get_weather('daegu'),
+        'incheon' : get_weather('incheon'),
+        'gwangju' : get_weather('gwangju'),
+        'daejeon' : get_weather('daejeon'),
+        'ulsan' : get_weather('ulsan'),
+        'gyeonggi' : get_weather('gyeonggi-do'),
+        'gangwon' : get_weather('gangwon-do'),
+        'chungbuk' : get_weather('Chungcheongbuk-do'),
+        'chungnam' : get_weather('Chungcheongnam-do'),
+        'jeonbuk' : get_weather('Jeollabuk-do'),
+        'jeonnam' : get_weather('Jeollanam-do'),
+        'gyeongbuk' : get_weather('gyeongsangbuk-do'),
+        'gyeongnam' : get_weather('gyeongsangnam-do'),
+        'jeju' : get_weather('jeju'),
+        'sejong' : get_weather('sejong')
+    }
 
+    return render_template('index.html', pm10=pm10, pm25=pm25, weather_data=weather_data)
 
+def get_weather(some_place):
+    r = get_weather_data(some_place)
+    weather2 = {
+        'city' : some_place,
+        'temperature' : str(round((r['main']['temp']-32)*(5/9), 2)),
+        'description' : r['weather'][0]['description'],
+        'icon' : r['weather'][0]['icon'],
+    }
+    return weather2
 
 
 @app.route('/templates/weather.html')
@@ -178,7 +206,7 @@ def some_place_page(some_place):
     r = get_weather_data(some_place)
     weather2 = {
         'city' : some_place,
-        'temperature' : r['main']['temp'],
+        'temperature' : str(round((r['main']['temp']-32)*(5/9))),
         'description' : r['weather'][0]['description'],
         'icon' : r['weather'][0]['icon'],
     }
