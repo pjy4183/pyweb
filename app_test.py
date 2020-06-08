@@ -202,8 +202,25 @@ def some_place_page(some_place):
         'temperature' : data[7],
         'windspeed' : data[9]
     }
+    if(some_place=='gyeonggi'):
+        r = get_weather_data('gyeonggi-do')
+    elif(some_place=='gangwon'):
+        r = get_weather_data('gangwon-do')
+    elif(some_place=='chungbuk'):
+        r = get_weather_data('Chungcheongbuk-do')
+    elif(some_place=='chungnam'):
+        r = get_weather_data('Chungcheongnam-do')
+    elif(some_place=='jeonbuk'):
+        r = get_weather_data('Jeollabuk-do')
+    elif(some_place=='jeonnam'):
+        r = get_weather_data('Jeollanam-do')
+    elif(some_place=='gyeongbuk'):
+        r = get_weather_data('gyeongsangbuk-do')
+    elif(some_place=='gyeongnam'):
+        r = get_weather_data('gyeongsangnam-do')
+    else:
+        r = get_weather_data(some_place)
 
-    r = get_weather_data(some_place)
     weather2 = {
         'city' : some_place,
         'temperature' : str(round((r['main']['temp']-32)*(5/9))),
