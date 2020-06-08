@@ -28,6 +28,10 @@ def get_weather_data(city):
     r = requests.get(url).json()
     return r
 
+def get_forecast_data(lat, lon):
+    url = f"https://api.openweathermap.org/data/2.5/onecall?lat={ lat }&lon={ lon }&exclude=current,minutely,hourly&appid=f69167b991bfeed068e309a6b69cd883"
+    r = requests.get(url).json()
+    return r
 
 @app.route('/')
 def index():
@@ -221,6 +225,42 @@ def some_place_page(some_place):
     else:
         r = get_weather_data(some_place)
 
+    r1 = get_forecast_data(r['coord']['lat'],r['coord']['lon'])
+    if(some_place=='seoul'):
+        r1 = get_forecast_data(37.5665, 126.9780)
+    elif(some_place=='busan'):
+        r1 = get_forecast_data(35.1796, 129.0756)
+    elif(some_place=='daegu'):
+        r1 = get_forecast_data(35.8714, 128.6014)
+    elif(some_place=='incheon'):
+        r1 = get_forecast_data(37.4563, 126.7052)
+    elif(some_place=='gwangju'):
+        r1 = get_forecast_data(35.1595, 126.8526)
+    elif(some_place=='daejeon'):
+        r1 = get_forecast_data(36.3504, 127.3845)
+    elif(some_place=='ulsan'):
+        r1 = get_forecast_data(35.5384, 129.3114)
+    elif(some_place=='gyeonggi'):
+        r1 = get_forecast_data(37.4138, 127.5183)
+    elif(some_place=='gangwon'):
+        r1 = get_forecast_data(37.8228, 128.1555)
+    elif(some_place=='chungbuk'):
+        r1 = get_forecast_data(36.8000, 127.7000)
+    elif(some_place=='chungnam'):
+        r1 = get_forecast_data(36.5623, 126.9541)
+    elif(some_place=='jeonbuk'):
+        r1 = get_forecast_data(35.7175, 127.1530)
+    elif(some_place=='jeonnam'):
+        r1 = get_forecast_data(34.8679, 126.9910)
+    elif(some_place=='gyeongbuk'):
+        r1 = get_forecast_data(36.4919, 128.8889)
+    elif(some_place=='gyeongnam'):
+        r1 = get_forecast_data(35.4606, 128.2132)
+    elif(some_place=='jeju'):
+        r1 = get_forecast_data(33.4996, 126.5312)
+    elif(some_place=='sejong'):
+        r1 = get_forecast_data(36.48750, 127.28167)
+    
     weather2 = {
         'city' : some_place,
         'temperature' : str(round((r['main']['temp']-32)*(5/9))),
@@ -228,7 +268,29 @@ def some_place_page(some_place):
         'icon' : r['weather'][0]['icon'],
     }
 
-    return render_template('template.html', place_name=some_place, weather=weather, weather2=weather2)
+    weather3 = {
+        'city' : some_place,
+        'day1_icon': r1['daily'][1]['weather'][0]['icon'],
+        'day1_temp_max': str(round(r1['daily'][1]['temp']['max']-273.15)),
+        'day1_temp_min': str(round(r1['daily'][1]['temp']['min']-273.15)),
+        'day2_icon': r1['daily'][2]['weather'][0]['icon'],
+        'day2_temp_max': str(round(r1['daily'][2]['temp']['max']-273.15)),
+        'day2_temp_min': str(round(r1['daily'][2]['temp']['min']-273.15)),
+        'day3_icon': r1['daily'][3]['weather'][0]['icon'],
+        'day3_temp_max': str(round(r1['daily'][3]['temp']['max']-273.15)),
+        'day3_temp_min': str(round(r1['daily'][3]['temp']['min']-273.15)),
+        'day4_icon': r1['daily'][4]['weather'][0]['icon'],
+        'day4_temp_max': str(round(r1['daily'][4]['temp']['max']-273.15)),
+        'day4_temp_min': str(round(r1['daily'][4]['temp']['min']-273.15)),
+        'day5_icon': r1['daily'][5]['weather'][0]['icon'],
+        'day5_temp_max': str(round(r1['daily'][5]['temp']['max']-273.15)),
+        'day5_temp_min': str(round(r1['daily'][5]['temp']['min']-273.15)),
+        'day6_icon': r1['daily'][6]['weather'][0]['icon'],
+        'day6_temp_max': str(round(r1['daily'][6]['temp']['max']-273.15)),
+        'day6_temp_min': str(round(r1['daily'][6]['temp']['min']-273.15))
+    }
+
+    return render_template('template.html', place_name=some_place, weather=weather, weather2=weather2, weather3=weather3)
 
 
 

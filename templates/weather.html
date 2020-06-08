@@ -11,7 +11,9 @@
     
 	<!-- Loading main css file -->
 	<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
-        
+    
+    <link href="/static/fonts/font-awesome.min.css" rel="stylesheet" type="text/css">
+
 </head>
 
 <body>
@@ -20,8 +22,8 @@
             <a href="/" class="branding">
                 <img src="/static/images/logo.png" alt="" class="logo">
                 <div class="logo-type">
-                    <h1 class="site-title">Finding Kor Weather</h1>
-                    <small class="site-description">Finding weather of Korean main cities</small>
+                    <h1 class="site-title">Finding KOR Weather</h1>
+                    <small class="site-description">Made by Jongyong Park, Jongkwang Park, Jonghan Park</small>
                 </div>
             </a>
 
@@ -109,8 +111,22 @@
             </div>
         </div>
     </section>
-    <footer class="footer">
-    </footer>
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-3 col-md-offset-1" >
+                    <div class="social-links">
+                        <a href="https://github.com/pjy4183"><i class="fa fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/jongyong-park-869824195/"><i class="fa fa-linkedin"></i></a>
+                        <a href="https://www.facebook.com/pjy4183"><i class="fa fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/_p.jongdragon_/"><i class="fa fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: right;">**Made by Jongyong Park, Jongkwang Park, Jonghan Park**</div>
+        </div>
+    </footer> <!-- .site-footer -->
 </body>
 
 </html>

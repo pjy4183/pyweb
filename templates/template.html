@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
 		
-		<title>Compass Starter by Ariona, Rian</title>
+		<title>Weather in {{place_name}}</title>
 
 		
 		<!-- Loading main css file -->
@@ -27,8 +27,8 @@
 					<a href="/" class="branding">
 						<img src="/static/images/logo.png" alt="" class="logo">
 						<div class="logo-type">
-							<h1 class="site-title">Finding Kor Weather</h1>
-							<small class="site-description">Finding weather of Korean main cities</small>
+							<h1 class="site-title">Finding KOR Weather</h1>
+							<small class="site-description">Made by Jongyong Park, Jongkwang Park, Jonghan Park</small>
 						</div>
 					</a>
 
@@ -62,12 +62,14 @@
                             </div> <!-- .forecast-header -->
                             <script>
                                 var d = new Date();
+                                utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+                                nd = new Date(utc + (3600000*'+9'));
                                 var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-                                document.getElementById("demo").innerHTML = days[d.getDay()];
+                                document.getElementById("demo").innerHTML = days[nd.getDay()];
 
-                                y = d.getFullYear();
-                                m = d.getMonth() + 1;
-                                d = d.getDate();
+                                y = nd.getFullYear();
+                                m = nd.getMonth() + 1;
+                                d = nd.getDate();
                                 document.getElementById("date").innerHTML = m + "/" + d + "/" + y;
                             </script>
 							<div class="forecast-content">
@@ -93,10 +95,10 @@
 							</div> <!-- .forecast-header -->
 							<div class="forecast-content">
 								<div class="forecast-icon">
-									<img src="/static/images/icons/icon-7.svg" alt="" width=48>
+									<img src="/static/images/icons/{{weather3.day1_icon}}.svg" alt="" width=48>
 								</div>
-								<div class="degree">23<sup>o</sup>C</div>
-								<small>18<sup>o</sup></small>
+								<div class="degree">{{weather3.day1_temp_max}}<sup>o</sup>C</div>
+								<small>{{weather3.day1_temp_min}}<sup>o</sup></small>
 							</div>
 						</div>
 						<div class="forecast">
@@ -105,10 +107,10 @@
 							</div> <!-- .forecast-header -->
 							<div class="forecast-content">
 								<div class="forecast-icon">
-									<img src="/static/images/icons/icon-7.svg" alt="" width=48>
+									<img src="/static/images/icons/{{weather3.day2_icon}}.svg" alt="" width=48>
 								</div>
-								<div class="degree">23<sup>o</sup>C</div>
-								<small>18<sup>o</sup></small>
+								<div class="degree">{{weather3.day2_temp_max}}<sup>o</sup>C</div>
+								<small>{{weather3.day2_temp_min}}<sup>o</sup></small>
 							</div>
 						</div>
 						<div class="forecast">
@@ -117,10 +119,10 @@
 							</div> <!-- .forecast-header -->
 							<div class="forecast-content">
 								<div class="forecast-icon">
-									<img src="/static/images/icons/icon-7.svg" alt="" width=48>
+									<img src="/static/images/icons/{{weather3.day3_icon}}.svg" alt="" width=48>
 								</div>
-								<div class="degree">23<sup>o</sup>C</div>
-								<small>18<sup>o</sup></small>
+								<div class="degree">{{weather3.day3_temp_max}}<sup>o</sup>C</div>
+								<small>{{weather3.day3_temp_min}}<sup>o</sup></small>
 							</div>
 						</div>
 						<div class="forecast">
@@ -129,10 +131,10 @@
 							</div> <!-- .forecast-header -->
 							<div class="forecast-content">
 								<div class="forecast-icon">
-									<img src="/static/images/icons/icon-7.svg" alt="" width=48>
+									<img src="/static/images/icons/{{weather3.day4_icon}}.svg" alt="" width=48>
 								</div>
-								<div class="degree">23<sup>o</sup>C</div>
-								<small>18<sup>o</sup></small>
+								<div class="degree">{{weather3.day4_temp_max}}<sup>o</sup>C</div>
+								<small>{{weather3.day4_temp_min}}<sup>o</sup></small>
 							</div>
 						</div>
 						<div class="forecast">
@@ -141,10 +143,10 @@
 							</div> <!-- .forecast-header -->
 							<div class="forecast-content">
 								<div class="forecast-icon">
-									<img src="/static/images/icons/icon-7.svg" alt="" width=48>
+									<img src="/static/images/icons/{{weather3.day5_icon}}.svg" alt="" width=48>
 								</div>
-								<div class="degree">23<sup>o</sup>C</div>
-								<small>18<sup>o</sup></small>
+								<div class="degree">{{weather3.day5_temp_max}}<sup>o</sup>C</div>
+								<small>{{weather3.day5_temp_min}}<sup>o</sup></small>
 							</div>
 						</div>
 						<div class="forecast">
@@ -153,21 +155,23 @@
 							</div> <!-- .forecast-header -->
 							<div class="forecast-content">
 								<div class="forecast-icon">
-									<img src="/static/images/icons/icon-7.svg" alt="" width=48>
+									<img src="/static/images/icons/{{weather3.day6_icon}}.svg" alt="" width=48>
 								</div>
-								<div class="degree">23<sup>o</sup>C</div>
-								<small>18<sup>o</sup></small>
+								<div class="degree">{{weather3.day6_temp_max}}<sup>o</sup>C</div>
+								<small>{{weather3.day6_temp_min}}<sup>o</sup></small>
 							</div>
                         </div>
                         <script>
                             var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
                             var d = new Date();
-                            var tomorrow = new Date(d);
-                            var tom2 = new Date(d);
-                            var tom3 = new Date(d);
-                            var tom4 = new Date(d);
-                            var tom5 = new Date(d);
-                            var tom6 = new Date(d);
+                            utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+                            nd = new Date(utc + (3600000*'+9'));
+                            var tomorrow = new Date(nd);
+                            var tom2 = new Date(nd);
+                            var tom3 = new Date(nd);
+                            var tom4 = new Date(nd);
+                            var tom5 = new Date(nd);
+                            var tom6 = new Date(nd);
                             tomorrow.setDate(tomorrow.getDate() + 1)
                             tom2.setDate(tomorrow.getDate() + 1)
                             tom3.setDate(tomorrow.getDate() + 2)
@@ -192,14 +196,15 @@
 
 						<div class="col-md-3 col-md-offset-1" >
 							<div class="social-links">
-								<a href="#"><i class="fa fa-github"></i></a>
-								<a href="#"><i class="fa fa-linkedin"></i></a>
-								<a href="#"><i class="fa fa-facebook"></i></a>
-								<a href="#"><i class="fa fa-instagram"></i></a>
+								<a href="https://github.com/pjy4183"><i class="fa fa-github"></i></a>
+								<a href="https://www.linkedin.com/in/jongyong-park-869824195/"><i class="fa fa-linkedin"></i></a>
+								<a href="https://www.facebook.com/pjy4183"><i class="fa fa-facebook"></i></a>
+								<a href="https://www.instagram.com/_p.jongdragon_/"><i class="fa fa-instagram"></i></a>
 							</div>
 						</div>
 					</div>
-
+                    <div style="text-align: right;">**Made by Jongyong Park, Jongkwang Park, Jonghan Park**<br>
+                    All weather data is referenced from data.go.kr and openweathermap API.</div>
 				</div>
 			</footer> <!-- .site-footer -->
 		</div>

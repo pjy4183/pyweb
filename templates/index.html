@@ -2,13 +2,15 @@
 <html>
 <head>
 	<meta charset="utf-8">
-    <title>다음 지도 API</title>
+    <title>Finding KOR Weather</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     
 	<!-- Loading main css file -->
-	<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
-        
+	<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style1.css') }}">
+      
+    <link href="/static/fonts/font-awesome.min.css" rel="stylesheet" type="text/css">
+
 </head>
 <body>
     <div class="site-header">
@@ -16,8 +18,8 @@
             <a href="/" class="branding">
                 <img src="/static/images/logo.png" alt="" class="logo">
                 <div class="logo-type">
-                    <h1 class="site-title">Finding Kor Weather</h1>
-                    <small class="site-description">Finding weather of Korean main cities</small>
+                    <h1 class="site-title">Finding KOR Weather</h1>
+                    <small class="site-description">Made by Jongyong Park, Jongkwang Park, Jonghan Park</small>
                 </div>
             </a>
 
@@ -77,103 +79,103 @@
         var data = [
             [37.5665, 126.9780, '<figure style="width: 150px !important;"><img src="http://openweathermap.org/img/w/{{ weather_data.seoul.icon }}.png" alt="Image"></figure>'+
                         '{{ weather_data.seoul.temperature}}<span>&#176;</span>C'+
-                        '<div style="display: inline", style="padding:5px;font-size:15px;">서울 <br>미세먼지: {{ pm10.seoul }},</div>'+
+                        '<div style="display: inline", style="padding:5px;font-size:15px;">  서울 <br>미세먼지: {{ pm10.seoul }},</div>'+
                          pm10status( {{ pm10.seoul }} ) + 
                          '<div style="display: inline",style="padding:5px;font-size:15px"><br>초미세먼지: {{ pm25.seoul }},</div>'+
                          pm25status( {{ pm25.seoul }} ),'seoul'],
             [35.1796, 129.0756, '<figure style="width: 150px !important;"><img src="http://openweathermap.org/img/w/{{ weather_data.busan.icon }}.png" alt="Image"></figure>'+
                         '{{ weather_data.busan.temperature}}<span>&#176;</span>C'+
-                        '<div style="display: inline", style="padding:5px;font-size:15px">부산 <br>미세먼지: {{ pm10.busan }},</div>'+
+                        '<div style="display: inline", style="padding:5px;font-size:15px">   부산 <br>미세먼지: {{ pm10.busan }},</div>'+
                          pm10status( {{ pm10.busan }} ) +
                          '<div style="display: inline", style="padding:5px;font-size:15px"><br>초미세먼지: {{ pm25.busan }},</div>'+
                          pm25status( {{ pm25.busan }} ),'busan'],
             [35.8714, 128.6014, '<figure style="width: 150px !important;"><img src="http://openweathermap.org/img/w/{{ weather_data.daegu.icon }}.png" alt="Image"></figure>'+
                         '{{ weather_data.daegu.temperature}}<span>&#176;</span>C'+
-                        '<div style="display: inline", style="padding:5px;font-size:15px">대구 <br>미세먼지: {{ pm10.deagu }},</div>'+
+                        '<div style="display: inline", style="padding:5px;font-size:15px">   대구 <br>미세먼지: {{ pm10.deagu }},</div>'+
                          pm10status( {{ pm10.daegu }} ) +
                          '<div style="display: inline", style="padding:5px;font-size:15px"><br>초미세먼지: {{ pm25.deagu }},</div>'+
                          pm25status( {{ pm25.daegu }} ),'daegu'],
             [37.4563, 126.7052, '<figure style="width: 150px !important;"><img src="http://openweathermap.org/img/w/{{ weather_data.incheon.icon }}.png" alt="Image"></figure>'+
                         '{{ weather_data.incheon.temperature}}<span>&#176;</span>C'+
-                        '<div style="display: inline", style="padding:5px;font-size:15px">인천 <br>미세먼지: {{ pm10.incheon }},</div>'+
+                        '<div style="display: inline", style="padding:5px;font-size:15px">   인천 <br>미세먼지: {{ pm10.incheon }},</div>'+
                          pm10status( {{ pm10.incheon }} ) +
                          '<div style="display: inline", style="padding:5px;font-size:15px"><br>초미세먼지: {{ pm25.incheon }},</div>'+
                          pm25status( {{ pm25.incheon }} ),'incheon'],
             [35.1595, 126.8526, '<figure style="width: 150px !important;"><img src="http://openweathermap.org/img/w/{{ weather_data.gwangju.icon }}.png" alt="Image"></figure>'+
                         '{{ weather_data.gwangju.temperature}}<span>&#176;</span>C'+
-                        '<div style="display: inline", style="padding:5px;font-size:15px">광주 <br>미세먼지: {{ pm10.gwangju }},</div>'+
+                        '<div style="display: inline", style="padding:5px;font-size:15px">   광주 <br>미세먼지: {{ pm10.gwangju }},</div>'+
                          pm10status( {{ pm10.gwangju }} ) +
                          '<div style="display: inline", style="padding:5px;font-size:15px"><br>초미세먼지: {{ pm25.gwangju }},</div>'+
                          pm25status( {{ pm25.gwangju }} ),'gwangju'],
             [36.3504, 127.3845, '<figure style="width: 150px !important;"><img src="http://openweathermap.org/img/w/{{ weather_data.daejeon.icon }}.png" alt="Image"></figure>'+
                         '{{ weather_data.daejeon.temperature}}<span>&#176;</span>C'+
-                        '<div style="display: inline", style="padding:5px;font-size:15px">대전 <br>미세먼지: {{ pm10.daejeon }},</div>'+
+                        '<div style="display: inline", style="padding:5px;font-size:15px">   대전 <br>미세먼지: {{ pm10.daejeon }},</div>'+
                          pm10status( {{ pm10.daejeon }} ) +
                          '<div style="display: inline", style="padding:5px;font-size:15px"><br>초미세먼지: {{ pm25.daejeon }},</div>'+
                          pm25status( {{ pm25.daejeon }} ),'daejeon'],
             [35.5384, 129.3114, '<figure style="width: 150px !important;"><img src="http://openweathermap.org/img/w/{{ weather_data.ulsan.icon }}.png" alt="Image"></figure>'+
                         '{{ weather_data.ulsan.temperature}}<span>&#176;</span>C'+
-                        '<div style="display: inline", style="padding:5px;font-size:15px">울산 <br>미세먼지: {{ pm10.ulsan }},</div>'+
+                        '<div style="display: inline", style="padding:5px;font-size:15px">   울산 <br>미세먼지: {{ pm10.ulsan }},</div>'+
                          pm10status( {{ pm10.ulsan }} ) +
                          '<div style="display: inline", style="padding:5px;font-size:15px"><br>초미세먼지: {{ pm25.ulsan }},</div>'+
                          pm25status( {{ pm25.ulsan }} ),'ulsan'],
             [37.4138, 127.5183, '<figure style="width: 150px !important;"><img src="http://openweathermap.org/img/w/{{ weather_data.gyeonggi.icon }}.png" alt="Image"></figure>'+
                         '{{ weather_data.gyeonggi.temperature}}<span>&#176;</span>C'+
-                        '<div style="display: inline", style="padding:5px;font-size:15px">경기도 <br>미세먼지: {{ pm10.gyeonggi }},</div>'+
+                        '<div style="display: inline", style="padding:5px;font-size:15px">   경기도 <br>미세먼지: {{ pm10.gyeonggi }},</div>'+
                          pm10status( {{ pm10.gyeonggi }} ) +
                          '<div style="display: inline", style="padding:5px;font-size:15px"><br>초미세먼지: {{ pm25.gyeonggi }},</div>'+
                          pm25status( {{ pm25.gyeonggi }} ),'gyeonggi'],
             [37.8228, 128.1555, '<figure style="width: 150px !important;"><img src="http://openweathermap.org/img/w/{{ weather_data.gangwon.icon }}.png" alt="Image"></figure>'+
                         '{{ weather_data.gangwon.temperature}}<span>&#176;</span>C'+
-                        '<div style="display: inline", style="padding:5px;font-size:15px">강원도 <br>미세먼지: {{ pm10.gangwon }},</div>'+
+                        '<div style="display: inline", style="padding:5px;font-size:15px">   강원도 <br>미세먼지: {{ pm10.gangwon }},</div>'+
                          pm10status( {{ pm10.gangwon }} ) +
                          '<div style="display: inline", style="padding:5px;font-size:15px"><br>초미세먼지: {{ pm25.gangwon }},</div>'+
                          pm25status( {{ pm25.gangwon }} ),'gangwon'],
             [36.8000, 127.7000, '<figure style="width: 150px !important;"><img src="http://openweathermap.org/img/w/{{ weather_data.chungbuk.icon }}.png" alt="Image"></figure>'+
                         '{{ weather_data.chungbuk.temperature}}<span>&#176;</span>C'+
-                        '<div style="display: inline", style="padding:5px;font-size:15px">충북 <br>미세먼지: {{ pm10.chungbuk }},</div>'+
+                        '<div style="display: inline", style="padding:5px;font-size:15px">   충청북도 <br>미세먼지: {{ pm10.chungbuk }},</div>'+
                          pm10status( {{ pm10.chungbuk }} ) +
                          '<div style="display: inline", style="padding:5px;font-size:15px"><br>초미세먼지: {{ pm25.chungbuk }},</div>'+
                          pm25status( {{ pm25.chungbuk }} ),'chungbuk'],
             [36.5623, 126.9541, '<figure style="width: 150px !important;"><img src="http://openweathermap.org/img/w/{{ weather_data.chungnam.icon }}.png" alt="Image"></figure>'+
                         '{{ weather_data.chungnam.temperature}}<span>&#176;</span>C'+
-                        '<div style="display: inline", style="padding:5px;font-size:15px">충남 <br>미세먼지: {{ pm10.chungnam }},</div>'+
+                        '<div style="display: inline", style="padding:5px;font-size:15px">   충청남도 <br>미세먼지: {{ pm10.chungnam }},</div>'+
                          pm10status( {{ pm10.chungnam }} ) +
                          '<div style="display: inline", style="padding:5px;font-size:15px"><br>초미세먼지: {{ pm25.chungnam }},</div>'+
                          pm25status( {{ pm25.chungnam }} ),'chungnam'],
             [35.7175, 127.1530, '<figure style="width: 150px !important;"><img src="http://openweathermap.org/img/w/{{ weather_data.jeonbuk.icon }}.png" alt="Image"></figure>'+
                         '{{ weather_data.jeonbuk.temperature}}<span>&#176;</span>C'+
-                        '<div style="display: inline", style="padding:5px;font-size:15px">전북 <br>미세먼지: {{ pm10.jeonbuk }},</div>'+
+                        '<div style="display: inline", style="padding:5px;font-size:15px">   전라북도 <br>미세먼지: {{ pm10.jeonbuk }},</div>'+
                          pm10status( {{ pm10.jeonbuk }} ) +
                          '<div style="display: inline", style="padding:5px;font-size:15px"><br>초미세먼지: {{ pm25.jeonbuk }},</div>'+
                          pm25status( {{ pm25.jeonbuk }} ),'jeonbuk'],
             [34.8679, 126.9910, '<figure style="width: 150px !important;"><img src="http://openweathermap.org/img/w/{{ weather_data.jeonnam.icon }}.png" alt="Image"></figure>'+
                         '{{ weather_data.jeonnam.temperature}}<span>&#176;</span>C'+
-                        '<div style="display: inline", style="padding:5px;font-size:15px">전남 <br>미세먼지: {{ pm10.jeonnam }},</div>'+
+                        '<div style="display: inline", style="padding:5px;font-size:15px">   전라남도 <br>미세먼지: {{ pm10.jeonnam }},</div>'+
                          pm10status( {{ pm10.jeonnam }} ) +
                          '<div style="display: inline", style="padding:5px;font-size:15px"><br>초미세먼지: {{ pm25.jeonnam }},</div>'+
                          pm25status( {{ pm25.jeonnam }} ),'jeonnam'],
             [36.4919, 128.8889, '<figure style="width: 150px !important;"><img src="http://openweathermap.org/img/w/{{ weather_data.gyeongbuk.icon }}.png" alt="Image"></figure>'+
                         '{{ weather_data.gyeongbuk.temperature}}<span>&#176;</span>C'+
-                        '<div style="display: inline", style="padding:5px;font-size:15px">경북 <br>미세먼지: {{ pm10.gyeongbuk }},</div>'+
+                        '<div style="display: inline", style="padding:5px;font-size:15px">   경상북도 <br>미세먼지: {{ pm10.gyeongbuk }},</div>'+
                          pm10status( {{ pm10.gyeongbuk }} ) +
                          '<div style="display: inline", style="padding:5px;font-size:15px"><br>초미세먼지: {{ pm25.gyeongbuk }},</div>'+
                          pm25status( {{ pm25.gyeongbuk }} ),'gyeongbuk'],
             [35.4606, 128.2132, '<figure style="width: 150px !important;"><img src="http://openweathermap.org/img/w/{{ weather_data.gyeongnam.icon }}.png" alt="Image"></figure>'+
                         '{{ weather_data.gyeongnam.temperature}}<span>&#176;</span>C'+
-                        '<div style="display: inline", style="padding:5px;font-size:15px">경남 <br>미세먼지: {{ pm10.gyeongnam }},</div>'+
+                        '<div style="display: inline", style="padding:5px;font-size:15px">   경상남도 <br>미세먼지: {{ pm10.gyeongnam }},</div>'+
                          pm10status( {{ pm10.gyeongnam }} ) +
                          '<div style="display: inline", style="padding:5px;font-size:15px"><br>초미세먼지: {{ pm25.gyeongnam }},</div>'+
                          pm25status( {{ pm25.gyeongnam }} ),'gyeongnam'],
             [33.4996, 126.5312, '<figure style="width: 150px !important;"><img src="http://openweathermap.org/img/w/{{ weather_data.jeju.icon }}.png" alt="Image"></figure>'+
                         '{{ weather_data.jeju.temperature}}<span>&#176;</span>C'+
-                        '<div style="display: inline", style="padding:5px;font-size:15px">제주 <br>미세먼지: {{ pm10.jeju }},</div>'+
+                        '<div style="display: inline", style="padding:5px;font-size:15px">   제주도 <br>미세먼지: {{ pm10.jeju }},</div>'+
                          pm10status( {{ pm10.jeju }} ) +
                          '<div style="display: inline", style="padding:5px;font-size:15px"><br>초미세먼지: {{ pm25.jeju }},</div>'+
                          pm25status( {{ pm25.jeju }} ),'jeju'],
             [36.48750, 127.28167, '<figure style="width: 150px !important;"><img src="http://openweathermap.org/img/w/{{ weather_data.sejong.icon }}.png" alt="Image"></figure>'+
                         '{{ weather_data.sejong.temperature}}<span>&#176;</span>C'+
-                        '<div style="display: inline", style="padding:5px;font-size:15px">세종 <br>미세먼지: {{ pm10.sejong }},</div>'+
+                        '<div style="display: inline", style="padding:5px;font-size:15px">   세종 <br>미세먼지: {{ pm10.sejong }},</div>'+
                          pm10status( {{ pm10.sejong }} ) +
                          '<div style="display: inline", style="padding:5px;font-size:15px"><br>초미세먼지: {{ pm25.sejong }},</div>'+
                          pm25status( {{ pm25.sejong }} ),'sejong']
@@ -239,11 +241,22 @@
         // 지도의 우측에 확대 축소 컨트롤을 추가한다
         map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
-        
-        
-
-
     </script>
-    
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-3 col-md-offset-1" >
+                    <div class="social-links">
+                        <a href="https://github.com/pjy4183"><i class="fa fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/jongyong-park-869824195/"><i class="fa fa-linkedin"></i></a>
+                        <a href="https://www.facebook.com/pjy4183"><i class="fa fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/_p.jongdragon_/"><i class="fa fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: right;">**Made by Jongyong Park, Jongkwang Park, Jonghan Park**</div>
+        </div>
+    </footer> <!-- .site-footer -->
 </body>
 </html>
